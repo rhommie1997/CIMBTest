@@ -1,0 +1,88 @@
+﻿@using CIMBTest.ViewModels;
+@model List<UseCase2ViewModel>
+
+<style>
+    .table-container {
+        overflow-x: auto;
+    }
+
+    
+</style>
+
+<div class="card shadow border-0 my-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <p class="h2">Use Case 2 List</p>
+        </div>
+    </div>
+    <div class="card-body p-4 table-container">
+        <table class="table" style="width:1700px">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>CIF</th>
+                    <th >Monthly Income</th>
+                    <th >Facility Type</th>
+                    <th>Plafond</th>
+                    <th>Outstanding</th>
+                    <th>Due Date</th>
+                    <th>
+                        Facility Start
+                        Date
+                    </th>
+                    <th>
+                        Annual Interest
+                        Rate
+                    </th>
+                    <th>Usage Type</th>
+                    <th>Active ?</th>
+                    <th>Tenor</th>
+                    <th>Installment</th>
+                    <th>DBR</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model.Count > 0)
+                {
+                    int i = 1;
+                    foreach (var data in Model ?? new List<UseCase2ViewModel>())
+                    {
+                        <tr>
+                            <td>@(i++)</td>
+                            <td>@data.CIF</td>
+                            <td>@data.MonthlyIncome.ToString("N2")</td>
+                            <td>@data.FacilityType</td>
+                            <td>@data.Plafond.ToString("N2")</td>
+                            <td>@data.Outstanding.ToString("N2")</td>
+                            <td>
+                                @if (data.DueDate != new DateTime(1900, 1, 1))
+                                {
+                                    @data.DueDate.ToString("dd-MM-yyyy")
+                                }
+                            </td>
+                            <td>
+                                @if (data.FacilityStartDate != new DateTime(1900, 1, 1))
+                                {
+                                    @data.FacilityStartDate.ToString("dd-MM-yyyy")
+                                }
+                            </td>
+                            <td>@data.PercentageOfAnnualInterestRate</td>
+                            <td>@data.UsageType</td>
+                            <td>@data.Status</td>
+                            <td>@data.Tenor</td>
+                            <td>@data.Installment.ToString("N2")</td>
+                            <td>@data.DBR.ToString("N3")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="14">No Data</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

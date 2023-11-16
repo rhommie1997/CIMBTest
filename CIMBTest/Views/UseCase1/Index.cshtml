@@ -1,0 +1,43 @@
+﻿<form class="row">
+    <div class="mb-3 col-md-6">
+        <label for="SearchDPD" class="form-label">DPD</label>
+        <input type="number" class="form-control" id="SearchDPD" value="30">
+    </div>
+    <div class="mb-3 col-md-6">
+        <label for="SearchCollectability" class="form-label">Collectability</label>
+        <input type="number" class="form-control" id="SearchCollectability" value="2">
+    </div>
+    <div class="col-12">
+        <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
+    </div>
+</form>
+
+<div class="divPreview" id="divPreview">
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+
+    $("#searchBtn").click(function () {
+        var searchDPD = $("#SearchDPD").val();
+        var searchCollectability = $("#SearchCollectability").val();
+
+        $.ajax({
+            type: "POST", 
+            url: "/UseCase1/Search", 
+            data: {
+                dpd: searchDPD,
+                collectability: searchCollectability
+            },
+            success: function (result) {
+                $("#divPreview").html(result);
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+
+
+</script>

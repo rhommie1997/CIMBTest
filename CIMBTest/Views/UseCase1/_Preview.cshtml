@@ -1,0 +1,50 @@
+﻿@using CIMBTest.ViewModels;
+@model UseCase1ViewModel
+
+<div class="card shadow border-0 my-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <p class="h2">Calculate Result</p>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="mb-3">
+            <label class="h5">Total Data: @Model.total</label>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Jenis Kredit</th>
+                    <th>Kredit No</th>
+                    <th>Active ?</th>
+                    <th>Year Month</th>
+                    <th>DPD</th>
+                    <th>Collectability</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(@Model.listData?.Count > 0){
+                    int i = 1;
+                    foreach (var data in Model.listData ?? new List<UseCase1DataViewModel>())
+                    {
+                        <tr>
+                            <td>@(i++)</td>
+                            <td>@data.jeniskredit</td>
+                            <td>@data.kreditno</td>
+                            <td>@(data.Active == "Y" ? "Yes" : "No")</td>
+                            <td>@data.TahunBulan</td>
+                            <td>@data.DPD</td>
+                            <td>@data.Col</td>
+                        </tr>
+                    }
+                }else{
+                    <tr>
+                        <td colspan="7">No Data</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
